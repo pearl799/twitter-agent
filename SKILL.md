@@ -25,7 +25,7 @@ metadata:
     os:
       - darwin
       - linux
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Twitter Agent Skill
@@ -39,6 +39,7 @@ Automates Twitter/X operations for an AI+Crypto account: post original tweets, r
 You need:
 1. **Twitter Developer Account** — get API keys at https://developer.x.com
 2. **6551 API Token** (`TWITTER_TOKEN`) — get at https://6551.io/mcp (for hot topic fetching)
+3. Optional **Xquik API key** (`XQUIK_API_KEY`) for read-only X research
 
 When installing, OpenClaw will prompt you to fill in each env variable.
 
@@ -53,6 +54,13 @@ When installing, OpenClaw will prompt you to fill in each env variable.
 | `TWITTER_TOKEN` | https://6551.io/mcp |
 
 > **Important**: Set your Twitter App permissions to **Read and Write** before generating the Access Token.
+
+Optional read-only research env vars:
+
+| Variable | Where to get |
+|---|---|
+| `XQUIK_API_KEY` | Xquik account |
+| `XQUIK_BASE_URL` | Optional, defaults to `https://xquik.com` |
 
 ---
 
@@ -81,6 +89,16 @@ python3 $SKILL_DIR/scripts/twitter_reply.py --tweet_id "TWEET_ID" --text "Your r
 python3 $SKILL_DIR/scripts/twitter_quote.py --tweet_id "TWEET_ID" --text "Your comment"
 ```
 
+### 4. Research candidates with Xquik
+
+```bash
+python3 $SKILL_DIR/scripts/xquik_research.py search "AI crypto" --limit 10 --format markdown
+```
+
+Use this before publishing to find current public posts, likely reply targets,
+and quote candidates. Treat results as research context and verify factual
+claims before writing.
+
 ---
 
 ## Full AI+Crypto workflow
@@ -92,6 +110,12 @@ curl -s -X POST "https://ai.6551.io/open/twitter_search" \
   -H "Authorization: Bearer $TWITTER_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"keywords": "AI crypto", "minLikes": 500, "product": "Top", "maxResults": 10}'
+```
+
+Alternative read-only research path via Xquik:
+
+```bash
+python3 $SKILL_DIR/scripts/xquik_research.py search "AI crypto" --limit 10 --format markdown
 ```
 
 Fetch KOL tweets:

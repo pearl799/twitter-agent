@@ -7,6 +7,7 @@ Automates Twitter/X operations for an AI+Crypto account. Post original tweets, r
 - Post tweets (text or with image)
 - Reply to any tweet by ID
 - Quote tweet with your own commentary
+- Research public X posts through Xquik before posting
 - Full AI+Crypto workflow: fetch trending → generate content → publish
 - Integrates with [6551 opentwitter](https://6551.io/mcp) for hot topic fetching
 
@@ -34,6 +35,13 @@ OpenClaw will prompt you to fill in the required credentials.
 | `TW_ACCESS_TOKEN` | Access Token | developer.x.com → App → Generate (Read+Write) |
 | `TW_ACCESS_TOKEN_SECRET` | Access Token Secret | developer.x.com → App → Generate (Read+Write) |
 | `TWITTER_TOKEN` | 6551 API Token | [6551.io/mcp](https://6551.io/mcp) |
+
+Optional research backend:
+
+| Env Variable | Description | Where to get |
+|---|---|---|
+| `XQUIK_API_KEY` | Xquik read API key | Xquik account |
+| `XQUIK_BASE_URL` | Optional API base URL | Defaults to `https://xquik.com` |
 
 ## Usage
 
@@ -72,6 +80,15 @@ python3 ~/.openclaw/skills/twitter-agent/scripts/twitter_reply.py \
 python3 ~/.openclaw/skills/twitter-agent/scripts/twitter_quote.py \
   --tweet_id "1234567890" --text "Your commentary"
 ```
+
+**Research candidates before posting:**
+```bash
+python3 ~/.openclaw/skills/twitter-agent/scripts/xquik_research.py \
+  search "AI crypto" --limit 10 --format markdown
+```
+
+Use Xquik research output to select topics, reply targets, or quote
+tweet candidates. Verify factual claims before publishing.
 
 ## Rate Limits (Free Tier)
 
