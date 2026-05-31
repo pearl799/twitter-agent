@@ -25,7 +25,7 @@ metadata:
     os:
       - darwin
       - linux
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Twitter Agent Skill
@@ -39,6 +39,7 @@ Automates Twitter/X operations for an AI+Crypto account: post original tweets, r
 You need:
 1. **Twitter Developer Account** — get API keys at https://developer.x.com
 2. **6551 API Token** (`TWITTER_TOKEN`) — get at https://6551.io/mcp (for hot topic fetching)
+3. Optional **GetXAPI API key** (`GETXAPI_API_KEY`) for read-only X research
 
 When installing, OpenClaw will prompt you to fill in each env variable.
 
